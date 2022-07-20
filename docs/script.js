@@ -97,8 +97,8 @@ function screen(display){
  }
 
 let arrReminder = [] 
-function reminder(history){ 
-  arrReminder.push(history)
+function reminder(x){ 
+  arrReminder.push(x)
   $('.reminder').text(arrReminder.join(''));
 }
 })

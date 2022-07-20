@@ -39,7 +39,7 @@ function handleSymbol(operator){
      result = '';
      countDecimal = 0;
      arrReminder = [];
-     reminder('')
+     $('.reminder').addClass('hidden')
      break;
      case '←':
       display.charAt(display.length - 1) == '.' ? countDecimal = 0 : countDecimal;
@@ -51,7 +51,7 @@ function handleSymbol(operator){
       copy = display;
       result = '';
       arrReminder = [];
-      reminder('');
+      $('.reminder').addClass('hidden')
       break;
      case '.':
       countDecimal++
@@ -100,6 +100,7 @@ let arrReminder = []
 function reminder(x){ 
   arrReminder.push(x)
   $('.reminder').text(arrReminder.join(''));
+  $('.reminder').removeClass('hidden')
 }
 })
 

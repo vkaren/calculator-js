@@ -6,10 +6,11 @@ $(document).ready(function() {
  
 
   $('button').on('click',onButtonClick);
-  $(document).on("keydown", onButtonClick);
+  $('body').on("keydown", onButtonClick);
 
   function onButtonClick(event){ 
-    let text = $(this).text() || event.key;
+    console.log(event.key)
+    let text = event.key || event.target.innerText ;
     
     if(isNaN(text)){
         handleSymbol(text)

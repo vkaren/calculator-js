@@ -5,10 +5,12 @@ $(document).ready(function() {
   let countDecimal = 0;
  
 
-  $('button').click(onButtonClick);
+  $('button').on('click',onButtonClick);
+  $(document).on("keydown", onButtonClick);
 
-  function onButtonClick(){ 
-    let text = $(this).text();
+  function onButtonClick(event){ 
+    let text = $(this).text() || event.key;
+    
     if(isNaN(text)){
         handleSymbol(text)
     } else{
@@ -42,10 +44,12 @@ function handleSymbol(operator){
      $('.reminder').addClass('hidden')
      break;
      case '←':
+     case 'Backspace':
       display.charAt(display.length - 1) == '.' ? countDecimal = 0 : countDecimal;
       display = display.length > 1 ? display.slice(0,-1) : '0';
       break;
      case '=':
+     case 'Enter':
       result += display;
       display = eval(result) % 1 !== 0 && (eval(result)+ '').length > 4 ? (eval(result)).toFixed(4) + '' : eval(result) + '';
       copy = display;
@@ -60,8 +64,15 @@ function handleSymbol(operator){
      case '-':
       display == '0' ? display = '-' : handleMath(operator);
       break;
-     default: 
+     case '+':
+     case '/':
+     case '÷':
+     case '*':
+     case '×':
      handleMath(operator)
+     break;
+     default:
+     return false
      break;
    }
    
@@ -97,12 +108,9 @@ function screen(display){
  }
 
 let arrReminder = [] 
-function reminder(x){ 
-  arrReminder.push(x)
+function reminder(history){ 
+   arrReminder.push(history)
   $('.reminder').text(arrReminder.join(''));
   $('.reminder').removeClass('hidden')
 }
 })
-
-
-
